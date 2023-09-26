@@ -1,19 +1,19 @@
 
-
-# GNARmodelling
+# GNAR modelling for congestion costs in ERCOT
 Codebase for Clara Berger's MSc Dissertation at University of Oxford: Using network autoregressive models to predict nodal congestion costs in the ERCOT electrical grid
 
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/github_username/repo_name">
-    <img src="figures/tx_network_.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/claraberger0/GNARmodelling">
+    <img src="figures/tx_network_.png" alt="Logo" width="100" height="100">
   </a>
 
 <h3 align="center">Using network autoregressive models to predict nodal congestion costs in the ERCOT electrical grid</h3>
 
 </div>
 
+This project was carried out in collaboration with [[Aurora Energy Research](https://auroraer.com/)].
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
@@ -42,65 +42,35 @@ Python:
 
 
 <!-- ROADMAP -->
-## Roadmap
+## Contents
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
+- [ ] code
+  - `run_get_grid_geometry.py` python file for constructing the electric grid of Texas using public data, find all node locations to create an adjacency matrix as well merge nodes from the public data with those from Aurora
+  - `get_grid_geometry.py` python file containing the functions for `run_get_grid_geometry.py`
 
-See the [open issues](https://github.com/claraberger0/GNARmodelling/issues) for a full list of proposed features (and known issues).
+  - `GNAR.R` R file that creates a network, manipulates the historical congestion cost data, fits the GNAR model, assess model performance, and forecasts future congestion costs based on the fit model
+  - `run_GNAR.R` R file containing the functions for `run_get_grid_geometry.py`
+    
+  - `network_statistics.R` R file that creates an `igraph` network for the Texas electric grid and then extracts key network statistics
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+- [ ] network_comp
 
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+- [ ] grid_shape
+- [ ] cb_2022_us_state_5m
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - cberger4@wellesley.edu@cberger4@wellesley.edu_client.com
+Clara Berger - cberger4@wellesley.edu
 
 Project Link: [https://github.com/claraberger0/GNARmodelling](https://github.com/claraberger0/GNARmodelling)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* []()
-* []()
-* []()
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
