@@ -11,7 +11,7 @@
 
 </div>
 
-This project was carried out in collaboration with [[Aurora Energy Research](https://auroraer.com/)].
+This project was carried out in collaboration with [Aurora Energy Research](https://auroraer.com/).
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
