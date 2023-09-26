@@ -29,7 +29,7 @@ load_libraries()
 ###############################################################################################################
 
 # set working directory
-wkdr = paste0(getwd(),"/")
+wkdr = "/Users/claraberger/Library/CloudStorage/OneDrive-Nexus365/Documents/Dissertation/GNARmodelling/network_comp/"
 
 edges.filename = "fake_edges2.csv"
 
