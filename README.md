@@ -44,7 +44,7 @@ Python:
 <!-- ROADMAP -->
 ## Contents
 
-- [ ] code
+### code
   - `run_get_grid_geometry.py` python file for constructing the electric grid of Texas using public data, find all node locations to create an adjacency matrix as well merge nodes from the public data with those from Aurora
   - `get_grid_geometry.py` python file containing the functions for `run_get_grid_geometry.py`
 
@@ -53,10 +53,18 @@ Python:
     
   - `network_statistics.R` R file that creates an `igraph` network for the Texas electric grid and then extracts key network statistics
 
-- [ ] network_comp
+### network_comp
+  - `network_comparison.R` R file that compares the networks created using public data and the actual electric grid of Texas
 
-- [ ] grid_shape
-- [ ] cb_2022_us_state_5m
+### grid_shape
+  - `us_grid.shp` shapefile from the feature layer U.S. Electric Power Transmission Lines based on data from Homeland Infrastructure Foundation-Level Data (HIFLD) [
+U.S. Electric Power Transmission Lines]([https://www.census.gov/geographies/mapping-files/time-series/](https://www.arcgis.com/home/item.html?id=d4090758322c4d32a4cd002ffaa0aa12&view=list&sortOrder=desc&sortField=defaultFSOrder))
+
+### cb_2022_us_state_5m
+  - `cb_2022_us_state_5m.shp` shapefile of US states from [US Census TIGER API](https://www.census.gov/geographies/mapping-files/time-series/) used to cut out the transmission lines in Texas
+
+### figures
+  - `cb_2022_us_state_5m.shp` shapefile of US states from [US Census TIGER API](https://www.census.gov/geographies/mapping-files/time-series/) used to cut out the transmission lines in Texas
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
