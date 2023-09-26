@@ -1,5 +1,5 @@
 
-# GNAR modelling for congestion costs in ERCOT
+# Using GNAR models for congestion costs in ERCOT
 
 <h3 align="center">Using network autoregressive models to predict nodal congestion costs in the ERCOT electrical grid</h3>
 <!-- PROJECT LOGO -->
