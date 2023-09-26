@@ -75,9 +75,12 @@ Project Link: [https://github.com/claraberger0/GNARmodelling](https://github.com
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<div align="right">
+![Dept_Stats_logo_horizontal_RGB](https://github.com/claraberger0/GNARmodelling/assets/36642951/ab6f9a48-8d0a-48c6-bcaf-0cfad3acbfeb)
+
+<div align="left">
   <a>
-    <img src="file:///Users/claraberger/Library/CloudStorage/OneDrive-Nexus365/Documents/Dissertation/writeup/Dept_Stats_logo_horizontal_RGB.jpg" alt="Logo" width="80" height="200">
+    <img src="https://github.com/claraberger0/GNARmodelling/assets/36642951/ab6f9a48-8d0a-48c6-bcaf-0cfad3acbfeb" width="80" height="200">
   </a>
 
 </div>
+
