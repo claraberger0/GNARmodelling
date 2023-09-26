@@ -6,7 +6,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/claraberger0/GNARmodelling">
-    <img src="figures/tx_network_.png" alt="Logo" width="500" height="500">
+    <img src="figures/tx_network_.png" alt="Logo" width="400" height="400">
   </a>
 
 </div>
