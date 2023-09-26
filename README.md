@@ -58,7 +58,7 @@ Python:
 U.S. Electric Power Transmission Lines]([https://www.census.gov/geographies/mapping-files/time-series/](https://www.arcgis.com/home/item.html?id=d4090758322c4d32a4cd002ffaa0aa12&view=list&sortOrder=desc&sortField=defaultFSOrder))
 
 ### cb_2022_us_state_5m
-  - `cb_2022_us_state_5m.shp` shapefile of US states from [US Census TIGER API](https://www.census.gov/geographies/mapping-files/time-series/) used to cut out the transmission lines in Texas
+  - `cb_2022_us_state_5m.shp` shapefile of US states from [US Census TIGER API](https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html) used to cut out the transmission lines in Texas
 
 ### figures
   - `tx_network_.png` figure of the network created from the Texas elextric grid with transmission lines as edges based on public data
