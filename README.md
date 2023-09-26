@@ -1,15 +1,13 @@
 
 # GNAR modelling for congestion costs in ERCOT
-Codebase for Clara Berger's MSc Dissertation at University of Oxford: Using network autoregressive models to predict nodal congestion costs in the ERCOT electrical grid
 
+<h3 align="center">Using network autoregressive models to predict nodal congestion costs in the ERCOT electrical grid</h3>
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <a href="https://github.com/claraberger0/GNARmodelling">
-    <img src="figures/tx_network_.png" alt="Logo" width="100" height="100">
+    <img src="figures/tx_network_.png" alt="Logo" width="500" height="500">
   </a>
-
-<h3 align="center">Using network autoregressive models to predict nodal congestion costs in the ERCOT electrical grid</h3>
 
 </div>
 
@@ -18,11 +16,10 @@ This project was carried out in collaboration with [[Aurora Energy Research](htt
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `claraberger0`, `GNARmodelling`, `twitter_handle`, `linkedin_username`, `cberger4@wellesley.edu_client`, `cberger4@wellesley.edu`, `Using network autoregressive models to predict nodal congestion costs in the ERCOT electrical grid`, `project_description`
+Codebase for Clara Berger's MSc Dissertation at University of Oxford: Using network autoregressive models to predict nodal congestion costs in the ERCOT electrical grid
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
+Abstract: 
+Nodal pricing models require that energy prices be modelled at a number of in- teracting nodes simultaneously. In this report, we model the congestion cost com- ponent of energy prices at various nodes in the Electric Reliability Council of Texas (ERCOT) grid. We utilise Generalised Network Autoregressive (GNAR) models to constrain the interactions between various nodes based on network structure. Our method contributes a novel approach in electricity price modelling by employing an autoregressive model at the nodal level that incorporates grid structure. The models perform well in fitting the nodal historical congestion cost data, but display limited forecasting capabilities when predicting more than one hour in the future. Assum- ing the edges are present a priori leads to a robust method of dimension reduction for Vector Autoregressive modelling, but limits us to only modelling between 8 and 59 nodes at a time. Overall, incorporating neighbour effects improves the models’ prediction capabilities over a univariate AR model for 11 out of 16 combinations of time series and network structure.
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -64,7 +61,8 @@ U.S. Electric Power Transmission Lines]([https://www.census.gov/geographies/mapp
   - `cb_2022_us_state_5m.shp` shapefile of US states from [US Census TIGER API](https://www.census.gov/geographies/mapping-files/time-series/) used to cut out the transmission lines in Texas
 
 ### figures
-  - `cb_2022_us_state_5m.shp` shapefile of US states from [US Census TIGER API](https://www.census.gov/geographies/mapping-files/time-series/) used to cut out the transmission lines in Texas
+  - `tx_network_.png` figure of the network created from the Texas elextric grid with transmission lines as edges based on public data
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
