@@ -69,8 +69,10 @@ Python:
 <!-- CONTACT -->
 ## Contact
 
-Clara Berger 
+#### Clara Berger 
+
 Email: cberger4@wellesley.edu 
+
 Github: [https://github.com/claraberger0](https://github.com/claraberger0)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
