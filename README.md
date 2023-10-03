@@ -69,9 +69,9 @@ Python:
 <!-- CONTACT -->
 ## Contact
 
-Clara Berger - cberger4@wellesley.edu
-
-Project Link: [https://github.com/claraberger0/GNARmodelling](https://github.com/claraberger0/GNARmodelling)
+Clara Berger 
+Email: cberger4@wellesley.edu 
+Github: [https://github.com/claraberger0](https://github.com/claraberger0)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
