@@ -67,6 +67,10 @@ Python:
 
 
 <!-- CONTACT -->
+## References
+Marina Knight et al. “Generalized Network Autoregressive Processes and the GNAR Package”. In: Journal of Statistical Software 96 (Nov. 29, 2020), pp. 1–36. URL: https://doi.org/10.18637/jss.v096.i05
+
+<!-- CONTACT -->
 ## Contact
 
 #### Clara Berger 
