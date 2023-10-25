@@ -65,6 +65,7 @@ exp_costs <- function(hist.log, mins){
   hist.output <- as.data.frame(mapply(function(x,y){exp(x) - 1.01*abs(y)}, hist.log, mins))
 }
 # Since we don't care about the magnitude of the big spikes, cut off values outside of 3 stdevs from the mean
+# Since we don't care about the magnitude of the big spikes, cut off values outside of 3 stdevs from the mean
 clip_spikes <- function(vec.input){
   # Get the 97.7 and 2.3 percentiles to be the upper and lower bounds of data we want
   upper <- mean(vec.input, na.rm = TRUE) + 2*sd(vec.input, na.rm = TRUE)
@@ -83,11 +84,10 @@ create_ts <- function(hist.input, times){
   cong.ts <- ts(hist.input)#, frequency = 24)
   #cong.ts <- cong.ts[, -ncol(cong.ts)]
 }
-
 manipulate_congestion_ts <- function(raw.input, matches.aur, matches.gis, log.bool, clip.bool, year.idx, rmpartialNA.bool){
   # average congestion costs over nodes at the same location
   hist.cong <- average_cong_costs(raw.input, matches.aur=matches.aur, matches.gis=matches.gis)
-
+  
   # do we want to log the data? 
   if(log.bool == TRUE){
     # to take the long of the data we want to make the data positive by adding the minimum value 
@@ -97,12 +97,12 @@ manipulate_congestion_ts <- function(raw.input, matches.aur, matches.gis, log.bo
     # reassign to the historical congestion costs
     hist.cong <- hist.conglog
   }
- 
+  
   if(clip.bool == TRUE){
     hist.congclip <- as.data.frame(sapply(hist.cong, clip_spikes))
     hist.cong <- hist.congclip
   }
-
+  
   # create a multivariate time series from the the costs
   cong.ts <- ts(hist.cong)
   
@@ -118,7 +118,6 @@ manipulate_congestion_ts <- function(raw.input, matches.aur, matches.gis, log.bo
     return(cong.year)
   }
 }
-
 ######################################################################################################
 ##### Get One Particular Year and a Connected Component
 ######################################################################################################
@@ -176,12 +175,12 @@ take_differences <- function(ts.input, lags=1, seasonal.option, seasonal.lags=24
 find_best_params <- function(network, diff.ts, alphas, betas, times, start.date, end.date, predstart.date, n.pred){
   
   params.df <- data.frame(alpha = numeric(0),
-                       beta = character(0),
-                       globalalpha = logical(0),
-                       BIC = numeric(0),
-                       SSE = numeric(0),
-                       RMSE = numeric(0),
-                       MASE = numeric(0))
+                          beta = character(0),
+                          globalalpha = logical(0),
+                          BIC = numeric(0),
+                          SSE = numeric(0),
+                          RMSE = numeric(0),
+                          MASE = numeric(0))
   j <- 1 
   for(i in 1:length(alphas)){
     print(paste("lags=",alphas[i],"neighbors=",as.character(betas[i])))
@@ -457,7 +456,7 @@ forecast_congestion <- function(diff.ts, times, start.date, end.date, predstart.
   pred.times <- times[times >= start.date & times <= predend.date] # times used to make prediction + predicted indices
   
   # Index within the differenced dataframe of the end of values used for prediction
-  pred.idx <- length(diff.ts[,1]) - 1 - as.numeric(difftime(end.date, predstart.date, units="hours")) # back up the appropriate number of days 
+  pred.idx <- length(diff.ts[,1]) - 1 - as.numeric(difftime(end.date, predstart.date, units="hours")) # back up the appropriate number of hours 
   
   # Use the data up until the predicted region to forecast ahead the set number of values
   pred <- predict(GNARfit(vts=diff.ts[1:pred.idx,], net = gridnet, alphaOrder = alpha, betaOrder = beta, globalalpha = globalalpha), 
@@ -465,8 +464,8 @@ forecast_congestion <- function(diff.ts, times, start.date, end.date, predstart.
   old.plus.pred <- rbind(diff.ts[1:(pred.idx), ], pred) # combine predicted values with the differenced data that came before
   rebuilt.old.plus.pred <- undo_differences(cong.ts, old.plus.pred, seasonal.option = 'season') # undifference the data
   # for plotting we want to show the model and the forecast together
-  fit.plus.pred <- rbind(fit[1:(pred.idx-24), ], pred) # combine the fit with the predicted differenced values
-  rebuilt.fit.plus.pred <- rbind(rebuilt[1:(pred.idx +1), ], rebuilt.old.plus.pred[(nrow(rebuilt.old.plus.pred) - (n.pred-1)):nrow(rebuilt.old.plus.pred), ])
+  fit.plus.pred <- rbind(fit[1:(pred.idx), ], pred) # combine the fit with the predicted differenced values
+  rebuilt.fit.plus.pred <- rbind(rebuilt[1:(pred.idx+24), ], rebuilt.old.plus.pred[(nrow(rebuilt.old.plus.pred) - (n.pred-1)):nrow(rebuilt.old.plus.pred), ])
   
   if(n.pred==1){
     print(paste("n.pred = ", n.pred))
@@ -474,7 +473,7 @@ forecast_congestion <- function(diff.ts, times, start.date, end.date, predstart.
     # Differenced Time Scale
     diff.df <- diff.ts %>%
       as.data.frame()
-    fit.df <- fit.plus.pred %>%
+    fit.df <- old.plus.pred %>%
       as.data.frame()  %>%
       setNames(name.order) %>%
       mutate(pred = ifelse(row_number() > (n() - n.pred), 1, 0)) # add a variable for whether it is a predicted value
@@ -482,13 +481,13 @@ forecast_congestion <- function(diff.ts, times, start.date, end.date, predstart.
     for(i in 1:ncol(diff.ts)){
       preddiffplot <- ggplot(data = diff.df, aes(x = c(1:nrow(diff.df)), y = eval(parse(text=colnames(diff.df)[i])))) +
         geom_line() +
-        geom_point(data=pred, aes(x = (pred.idx+1), y = pred[,i], color = "red"), size = 2)+
-        geom_line(data=fit.df, aes(x = c(24:(nrow(fit.df)+23)), y = eval(parse(text=colnames(fit.df)[i])), linetype = factor(pred)), color='red' ) +
+        geom_point(data=pred, aes(x = (pred.idx+1), y = pred[,i], color = "red"), shape=1, size = 2)+
+        geom_line(data=fit.df, aes(x = c(1:(nrow(fit.df))), y = eval(parse(text=colnames(fit.df)[i])), linetype = factor(pred)), color='red' ) +
         xlim((pred.idx-100),(pred.idx+n.pred)) +
-        scale_linetype_manual(name="", labels= c("Model Fit",""), values=c("solid","blank")) +
+        scale_linetype_manual(name="", labels= c("Used to Forecast",""), values=c("solid","blank")) +
         scale_color_manual(name="", labels= c("Forecasted"), values = c("red")) +
         labs(x = "Index", y = paste(colnames(diff.df)[i], " Differenced Congestion Costs"), title=paste("Cost Diff Forecasts for",date(predend.date),"using", date(start.date),"to",date(predstart.date-1)))+
-        theme(text = element_text(size = 24))
+        theme(text = element_text(size = 16))
       ggsave(filename = paste0(fig.path,"/forecasts/",colnames(diff.df)[i],"_diff_",n.pred,"n_",year,".png"))
     }
     
@@ -496,10 +495,10 @@ forecast_congestion <- function(diff.ts, times, start.date, end.date, predstart.
     # Add times and dates for plotting to the rebuilt dataset
     range.start <- predstart.date - days(3) # range of dates to display on plot
     range.end <- predend.date
-    rebuilt.df <- rebuilt.fit.plus.pred %>%
+    rebuilt.df <- rebuilt.old.plus.pred %>%
       as.data.frame() %>%
       setNames(name.order) %>%
-      mutate(time = pred.times[24:(length(pred.times))]) %>% # add datetime column
+      mutate(time = pred.times[1:(length(pred.times))]) %>% # add datetime column
       mutate(pred = ifelse(row_number() > (n() - n.pred), 1, 0)) %>% # add a variable for whether it is a predicted value
       filter(time >= range.start & time <= range.end) # subset based on the range we want to plot
     cong.df <- cong.ts %>%
@@ -510,12 +509,12 @@ forecast_congestion <- function(diff.ts, times, start.date, end.date, predstart.
     for(i in 1:ncol(cong.df)){
       predplot <- ggplot(data = cong.df, aes(x = time, y = eval(parse(text=colnames(cong.df)[i])) )) +
         geom_line() +
-        geom_line(data=rebuilt.df, aes(x = time, y = eval(parse(text=colnames(rebuilt.df)[i])), linetype = factor(pred)), color='red' ) +
-        geom_point(data=rebuilt.df, aes(x = predstart.date, y = rebuilt.df[nrow(rebuilt.df),i], color = "red"), size = 2) +
-        scale_linetype_manual(name="", labels= c("Model Fit",""), values=c("solid","blank")) +
+        geom_line(data=rebuilt.df, aes(x = time, y = rebuilt.df[(1:(nrow(rebuilt.df))),i], linetype = factor(pred)), color='red' ) +
+        geom_point(data=rebuilt.df, aes(x = predstart.date, y = rebuilt.df[nrow(rebuilt.df),i], color = "red"), shape=1,size = 2) +
+        scale_linetype_manual(name="", labels= c("Used to Forecast",""), values=c("solid","blank")) +
         scale_color_manual(name="", labels= c("Forecasted"), values = c("red")) +
         labs(x = "Day", y = paste(colnames(cong.df)[i],"Congestion Costs"), title=paste("Forecasts for",date(predend.date),"using", date(start.date),"to",date(predstart.date-1))) +
-        theme(text = element_text(size = 24))
+        theme(text = element_text(size = 16))
       ggsave(filename = paste0(fig.path,"/forecasts/",colnames(cong.df)[i],"_",n.pred,"n_",year,".png"))
     }
     
@@ -553,7 +552,7 @@ forecast_congestion <- function(diff.ts, times, start.date, end.date, predstart.
         xlim((pred.idx-100),pred.idx+n.pred) +
         scale_linetype_manual(name="", labels= c("Model Fit","Forecasted"), values=c("solid","dashed")) +
         labs(x = "Index", y = paste(colnames(diff.df)[i], " Differenced Congestion Costs"), title=paste("Cost Diff Forecasts for",date(predend.date),"using", date(start.date),"to",date(predstart.date-1))) +
-        theme(text = element_text(size = 24))
+        theme(text = element_text(size = 16))
       ggsave(filename = paste0(fig.path,"/forecasts/",colnames(diff.df)[i],"_diff_",n.pred,"n_",year,".png"))
     }
     
@@ -578,7 +577,7 @@ forecast_congestion <- function(diff.ts, times, start.date, end.date, predstart.
         geom_line(data=rebuilt.df, aes(x = time, y = eval(parse(text=colnames(rebuilt.df)[i])), linetype = factor(pred)), color='red' ) +
         scale_linetype_manual(name="", labels= c("Model Fit","Forecasted"), values=c("solid","dashed")) +
         labs(x = "Day", y = paste(colnames(cong.df)[i],"Congestion Costs"), title=paste("Forecasts for",date(predend.date),"using", date(start.date),"to",date(predstart.date-1))) +
-        theme(text = element_text(size = 24))
+        theme(text = element_text(size = 16))
       ggsave(filename = paste0(fig.path,"/forecasts/",colnames(cong.df)[i],"_",n.pred,"n_",year,".png"))
     }
     
